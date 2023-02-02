@@ -1,0 +1,17 @@
+{
+   "background": {
+      "service_worker": "monitor.js"
+   },
+   "description": "Monitor Microsoft Edge web browsing for inappropriate content.",
+   "icons": {
+      "128": "icon_128.png",
+      "48": "icon_48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuaZH0dk8oNbju8/8/JulgxBSg43sZ9A/8wXQ+a0CyJOlatkk7M4drblqg6dVnV1HGgNJuTnOmeNPswAPDDYfMR+19CKW3uTliNFMMO1FBAF2Tj6x2EkJZzmEG/VeOIiQZKE7KHREH7UCK05NB9RY71qSDs8U1jE67aSGM1uXwwmPiZIjUQHW0AqTLZYpLbAqzZWFK0BwFgwO7L8/Q6x6LuOZaB74AK8UzUBco4oY9PDuOXgcTsLsQgXVTW732OHKfnAigdKk2f7BqtklCJhGLJGiAjXu/IBtbKvLpeAp2ATo9P7PSy8QAwqpjslvo6r7m2wOM+DTADWOMWroEUmV9QIDAQAB",
+   "manifest_version": 3,
+   "name": "Bark for Microsoft Edge",
+   "permissions": [ "tabs", "identity", "identity.email", "management" ],
+   "short_name": "Bark",
+   "update_url": "https://edge.microsoft.com/extensionwebstorebase/v1/crx",
+   "version": "1.3"
+}
