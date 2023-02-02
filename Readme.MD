@@ -1,6 +1,6 @@
 # Unofficial Bark For Android Extension
 
-This is an unofficial extension for Firefox for bark.us. It is based off the official Edge release v1.3.0. You will need to have your child setup in bark as a monitored email.
+This is an unofficial extension for Firefox for [bark.us](http://bark.us). It is based off the official Edge release v1.3.0. You will need to have your child setup in bark as a monitored email.
 
 
 ### How to build 
