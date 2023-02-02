@@ -1,17 +1,66 @@
 {
-   "background": {
-      "service_worker": "monitor.js"
-   },
-   "description": "Monitor Microsoft Edge web browsing for inappropriate content.",
-   "icons": {
+  "description": "Monitor Firefox web browsing for inappropriate content.",
+  "manifest_version": 2,
+  "name": "Bark for Firefox",
+  "version": "1.3.0.1",
+  "homepage_url": "http://www.bark.us",
+  "icons": {
+    "192": "icon_192.png",
+    "128": "icon_128.png",
+    "48": "icon_48.png",
+    "32": "icon_32.png"
+  },
+  "developer": {
+    "name": "Alice Tries",
+    "url": "http://www.github.com/alycecil"
+  },
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": {
+      "192": "icon_192.png",
       "128": "icon_128.png",
-      "48": "icon_48.png"
-   },
-   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuaZH0dk8oNbju8/8/JulgxBSg43sZ9A/8wXQ+a0CyJOlatkk7M4drblqg6dVnV1HGgNJuTnOmeNPswAPDDYfMR+19CKW3uTliNFMMO1FBAF2Tj6x2EkJZzmEG/VeOIiQZKE7KHREH7UCK05NB9RY71qSDs8U1jE67aSGM1uXwwmPiZIjUQHW0AqTLZYpLbAqzZWFK0BwFgwO7L8/Q6x6LuOZaB74AK8UzUBco4oY9PDuOXgcTsLsQgXVTW732OHKfnAigdKk2f7BqtklCJhGLJGiAjXu/IBtbKvLpeAp2ATo9P7PSy8QAwqpjslvo6r7m2wOM+DTADWOMWroEUmV9QIDAQAB",
-   "manifest_version": 3,
-   "name": "Bark for Microsoft Edge",
-   "permissions": [ "tabs", "identity", "identity.email", "management" ],
-   "short_name": "Bark",
-   "update_url": "https://edge.microsoft.com/extensionwebstorebase/v1/crx",
-   "version": "1.3"
+      "48": "icon_48.png",
+      "32": "icon_32.png"
+    }
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "options_ui": {
+    "page": "options/options.html",
+    "browser_style": true,
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "bark.us@bark.fi",
+      "strict_min_version": "91.1.0"
+    }
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "storage",
+    "browsingData",
+    "webRequest",
+    "webRequestBlocking",
+    "management",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": [
+        "onload.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "monitor.js"
+    ]
+  }
 }

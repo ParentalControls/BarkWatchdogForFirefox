@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self';"/>
+
+    <link rel="stylesheet" href="../options/options.css"/>
+    <link rel="stylesheet" id="thanos_styles-css" href="../options/bark.css" type="text/css" media="all">
+
+    <link rel="icon" href="../icon_32.png" sizes="32x32">
+    <link rel="icon" href="../icon_48.png" sizes="48x48">
+    <link rel="icon" href="../icon_128.png" sizes="128x128">
+    <link rel="icon" href="../icon_192.png" sizes="192x192">
+</head>
+<body>
+<div>
+    </p>
+    <img src="../options/primary-logo.svg"/>
+    <h1> for Firefox</h1>
+
+    <button id="options" class="button button-primary button-wide " onclick="options()">
+            <i class="fas fa-cog">⚙options</i>
+    </button>
+
+    <hr/>
+    <div>
+        <label for="child_username">Child's Email Address:</label>
+        <input id="child_username" class="save_config" type="text" name="user" disabled placeholder="example@gmail.com"/><br/>
+    </div>
+</div>
+<script>
+    function options() {
+        browser.runtime.openOptionsPage();
+        document.body.style.display = "none";
+    }
+
+    function restoreOptions() {
+        browser.storage.sync.get(['child_email', 'locked']).then(
+            (res) => {
+                if (!res.locked) {
+                    //TODO show warning
+                } else if (res.child_email) {
+                    document.getElementById("child_username").value = res.child_email;
+                }
+            });
+    }
+
+
+    document.addEventListener('DOMContentLoaded', restoreOptions);
+</script>
+</body>
+</html>

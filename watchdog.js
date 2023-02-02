@@ -1,3 +1,4 @@
+//TODO
 const BARK_EXTENSION_IDS = [
   'jcocgejjjlnfddlhpbecfapicaajdibb', // Chrome Monitor production
   'agknpiliocimoiokabdfecmgilemoich', // Chrome Watchdog production
@@ -26,6 +27,7 @@ function dispositionReportUrl(disposition, id, email) {
 function reportDisposition(disposition, id, silent) {
   if (BARK_EXTENSION_IDS.indexOf(id) == -1) return;
 
+  //TODO
   chrome.identity.getProfileUserInfo(function (userInfo) {
     const url = dispositionReportUrl(disposition, id, userInfo.email);
 

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="options.css"/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/ui-darkness/jquery-ui.css"/>
+    <link rel="stylesheet" id="thanos_styles-css" href="bark.css" type="text/css" media="all">
+    <script src="jquery.min.js"></script>
+
+    <link rel="icon" href="../icon_32.png" sizes="32x32">
+    <link rel="icon" href="../icon_48.png" sizes="48x48">
+    <link rel="icon" href="../icon_128.png" sizes="128x128">
+    <link rel="icon" href="../icon_192.png" sizes="192x192">
+</head>
+<body>
+<div>
+    </p>
+    <img src="primary-logo.svg"/>
+    <h1> for Firefox</h1>
+    <hr/>
+    <div>
+        <label for="child_username">Child's Email Address:</label>
+        <input id="child_username" class="save_config" type="text" name="user" placeholder="example@gmail.com"/><br/>
+    </div>
+    </p>
+    <div id="done_modal">
+        <p>
+            Once you've set your child email address that is registered in <a href="https://bark.us">bark.us</a> please
+            press the
+            <i>Lock Config</i>
+            button.
+        </p>
+        <br><br><br>
+        <p>
+        <h1><b>Important!</b></h1>
+        <h3>You will not be able to undo this.</h3>
+        </p>
+        <br>
+        <p>
+            <button id="done" class="button button-primary button-wide ">Lock Config</button>
+        </p>
+    </div>
+
+    <hr>
+    <div>
+    <footer>
+        <p>
+            <a href="https://bark.us">bark.us</a>
+        </p>
+    </footer>
+    </div>
+</div>
+
+<script src="options.js"></script>
+</body>
+</html>
