@@ -14,7 +14,7 @@ function load_config() {
 }
 
 function save_config() {
-    browser.storage.sync.get(['child_email', 'locked']).then(
+    return browser.storage.sync.get(['child_email', 'locked']).then(
         (res) => {
             if (!res.locked) {
                 let childEmail = $('#child_username').val();
@@ -36,10 +36,20 @@ $('.save_config').change(function (e) {
 });
 
 $('#done').click(function (e) {
-    //TODO Validate email first is in valid .+\@.+\..+ format
-    //TODO add confirm that shows email
-    browser.storage.sync.set({
-        locked: 'locked',
-    }).then(load_config);
+    save_config()
+    .then(function () {
+        window.location.href = "../options/confirm.html"
+    })
 });
+
+$('#done_confirm').click(
+    function (e) {
+        //TODO Validate email first is in valid .+\@.+\..+ format
+        browser.storage.sync.set({
+            locked: 'locked',
+        }).then(function (e2) {
+            window.location.href = "../options/options.html"
+        });
+    }
+)
 

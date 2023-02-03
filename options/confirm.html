@@ -20,28 +20,24 @@
     </a>
     <hr/>
     <p>
+    <h3>You are about to bind this browser to the following email address</h3>
+    Please ensure it is your child's email address you have configured in <a href="http://bark.us">bark</a> already.
     <div>
+        <!-- this input is ignored, its used for styling and showing the value to the user -->
         <label for="child_username">Child's Email Address:</label>
-        <input id="child_username" class="save_config" type="text" name="user" placeholder="example@gmail.com"/><br/>
+        <input id="child_username" class="save_config" type="text" name="user" disabled placeholder="example@gmail.com"/><br/>
     </div>
     </p>
-    <div id="done_modal">
-        <p>
-            Once you've set your child email address that is registered in <a href="https://bark.us">bark.us</a> please
-            press the
-            <i>Lock Config</i>
-            button.
-        </p>
-        <br><br><br>
-        <p>
-        <h1><b>Important!</b></h1>
-        <h3>You will not be able to undo this.</h3>
-        </p>
-        <br>
-        <p>
-            <button id="done" class="button button-primary button-wide ">Lock Config</button>
-        </p>
-    </div>
+    <br><br><br>
+    <p>
+    <h1><b>Important!</b></h1>
+    <h3>You will not be able to undo this.</h3>
+    </p>
+    <br>
+    <p>
+        <button id="done_confirm" class="button button-primary button-wide ">Confirm Lock Config</button>
+    </p>
+
 
     <hr>
     <div>
