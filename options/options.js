@@ -31,11 +31,11 @@ function save_config() {
 document.addEventListener('DOMContentLoaded', load_config);
 
 //On change
-$('.save_config').change(function (e) {
+$('.save_config').change(function () {
     save_config();
 });
 
-$('#done').click(function (e) {
+$('#done').click(function () {
     save_config()
     .then(function () {
         window.location.href = "../options/confirm.html"
@@ -43,11 +43,11 @@ $('#done').click(function (e) {
 });
 
 $('#done_confirm').click(
-    function (e) {
+    function () {
         //TODO Validate email first is in valid .+\@.+\..+ format
         browser.storage.sync.set({
             locked: 'locked',
-        }).then(function (e2) {
+        }).then(function () {
             window.location.href = "../options/options.html"
         });
     }
