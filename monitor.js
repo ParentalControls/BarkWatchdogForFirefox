@@ -84,6 +84,6 @@ browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 //TODO
 //importScripts("watchdog.js")
 
-browser.browserAction.onClicked.addListener(function () {
+browser.action.onClicked.addListener(function () {
   browser.runtime.openOptionsPage();
 });
