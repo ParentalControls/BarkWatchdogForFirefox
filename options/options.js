@@ -7,7 +7,7 @@ function load_config() {
             }
             if (res.locked) {
                 $childUsername.removeClass("save_config");
-                $childUsername.attr('disabled','disabled');
+                $childUsername.attr('disabled', 'disabled');
                 $('#done_modal').hide()
             }
         });
@@ -36,10 +36,25 @@ $('.save_config').change(function () {
 });
 
 $('#done').click(function () {
+
     save_config()
-    .then(function () {
-        window.location.href = "../options/confirm.html"
-    })
+        .then(function () {
+            return browser.storage.sync.get(['child_email', 'locked'])
+        })
+        .then(function (res) {
+            let error = null;
+            if (res.locked) {
+                error = "Cannot change config while locked";
+            } else if (!res.child_email) {
+                error = "You have not yet set your childs email address.";
+            }
+            if (error) {
+                document.getElementById("error_field").innerHTML = error;
+                throw new Error(error);
+            } else {
+                window.location.href = "../options/confirm.html"
+            }
+        })
 });
 
 $('#done_confirm').click(
