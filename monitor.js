@@ -16,12 +16,6 @@ const BARK_EXTENSION_IDS = [
   CHROME_WATCHDOG, // Chrome Watchdog production
   EDGE_MONITOR, // Edge Monitor production
   EDGE_WATCHDOG, // Edge Watchdog production
-
-  // Update locally as needed
-  'cfjjjelgblfefpldkbpmldjakoohoohb', // Chrome Monitor debug
-  'pifhhmbdoikllhpofdknanfcddaajpfk', // Chrome Watchdog debug
-  'bnhgbicldegoglomikgnenecboibaepp', // Edge Monitor debug
-  'haklcjflhpomkecolmkjfllofddcigab', // Edige Watchdog debug
 ];
 
 // I remap the unofficial ids to an official variant to allow support.
