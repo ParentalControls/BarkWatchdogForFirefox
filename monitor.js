@@ -4,12 +4,12 @@ const DISPOSITION_URL = 'https://www.bark.us/connections/report-disposition';
 
 const CHROME_WATCHDOG = 'agknpiliocimoiokabdfecmgilemoich';
 const CHROME_MONITOR = 'jcocgejjjlnfddlhpbecfapicaajdibb';
+const EDGE_MONITOR = 'pjbpapmfoaplcoaohhdfgdkffdfebmkd';
+const EDGE_WATCHDOG = 'ildciggibamcpacfimbhbkaajnaphljd';
 
 const FIREFOX_WATCH_DOG = 'bark.us@watchdog.fi';//TODO
 const FIREFOX_MONITOR = 'bark.us@bark.fi';
 
-const EDGE_MONITOR = 'pjbpapmfoaplcoaohhdfgdkffdfebmkd';
-const EDGE_WATCHDOG = 'ildciggibamcpacfimbhbkaajnaphljd';
 const BARK_EXTENSION_IDS = [
   FIREFOX_MONITOR, //Unofficial
   CHROME_MONITOR, // Chrome Monitor production
