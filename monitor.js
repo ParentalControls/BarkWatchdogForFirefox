@@ -12,6 +12,7 @@ const FIREFOX_MONITOR = 'bark.us@bark.fi';
 
 const BARK_EXTENSION_IDS = [
   FIREFOX_MONITOR, //Unofficial
+  FIREFOX_WATCH_DOG, //Unofficial
   CHROME_MONITOR, // Chrome Monitor production
   CHROME_WATCHDOG, // Chrome Watchdog production
   EDGE_MONITOR, // Edge Monitor production
