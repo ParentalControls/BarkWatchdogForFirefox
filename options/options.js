@@ -103,3 +103,4 @@ $('#done_confirm').click(function () {
     });
 });
 
+$('#version').html(browser.runtime.getManifest().version);
