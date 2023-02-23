@@ -1,3 +1,6 @@
+const CHROME_MONITOR_PROD = 'jcocgejjjlnfddlhpbecfapicaajdibb';
+const DISPOSITION_URL = 'https://www.bark.us/connections/report-disposition';
+
 function load_config() {
     browser.storage.sync.get(['child_email', 'locked']).then(
         (res) => {
@@ -57,14 +60,46 @@ $('#done').click(function () {
         })
 });
 
-$('#done_confirm').click(
-    function () {
-        //TODO Validate email first is in valid .+\@.+\..+ format
-        browser.storage.sync.set({
-            locked: 'locked',
-        }).then(function () {
-            window.location.href = "../options/options.html"
-        });
+$('#done_confirm').click(function () {
+    function setupUninstallMonitorFirstRun(res) {
+        const url = new URL(DISPOSITION_URL);
+
+        url.searchParams.append('email', res.child_email);
+        url.searchParams.append('disposition', 'uninstalled');
+        url.searchParams.append('reporter', CHROME_MONITOR_PROD);
+        url.searchParams.append('extension', CHROME_MONITOR_PROD);
+        browser.runtime.setUninstallURL(url.toString());
+
+        console.log("Set First-Time Personalized Uninstall URL");
     }
-)
+
+    function validateEmail(res) {
+        let error = null;
+        if (!res.child_email) {
+            error = "You have not yet set your childs email address. Please press the 'Go Back' button.";
+        }
+
+        //TODO Validate email first is in valid .+\@.+\..+ format
+
+        return error;
+    }
+
+    browser.storage.sync.get(['child_email'])
+    .then(function (res) {
+        let error = validateEmail(res);
+        if (error) {
+            document.getElementById("error_field").innerHTML = error;
+            throw new Error(error);
+        } else {
+            setupUninstallMonitorFirstRun(res);
+
+            browser.storage.sync.set({
+                locked: 'locked',
+            }).then(function () {
+                console.log("Locked in email of [",res.child_email,"]");
+                window.location.href = "../options/options.html"
+            });
+        }
+    });
+});
 
