@@ -64,7 +64,7 @@ function sendUrl(email, title, url) {
       body: json,
       headers: headers,
     }).catch(function (e) {
-      console.log(e)
+      console.debug(e)
     });
   }
 
@@ -146,7 +146,7 @@ function reportDisposition(disposition, id, silent) {
     const url = dispositionReportUrl(disposition, id, email );
 
     if (silent) {
-      console.log("Silent Report for [", url, "]");
+      console.debug("Silent Report for [", url, "]");
       const uri = new URL(url);
       uri.searchParams.append('silent', true);
 
@@ -166,22 +166,29 @@ function reportDisposition(disposition, id, silent) {
 }
 
 function setUninstallURL() {
-  browser.storage.sync.get(['child_email']).then(function (res) {
-    const email = res.child_email;
+    browser.storage.sync.get(['child_email']).then(function (res) {
+        const email = res.child_email;
 
-    if (!email) {
-      return;
-    }
+        if (!email) {
+            console.debug("No Email Set Yet, showing ui");
+            //child email not set, prompt to configure
+            setTimeout(
+                function () {
+                    browser.runtime.openOptionsPage();
+                },
+                1000 //1 seconds
+            )
+        } else {
+            const url = dispositionReportUrl(
+                'uninstalled',
+                browser.runtime.id,
+                email
+            );
+            browser.runtime.setUninstallURL(url.toString());
 
-    const url = dispositionReportUrl(
-        'uninstalled',
-        browser.runtime.id,
-        email
-    );
-    browser.runtime.setUninstallURL(url.toString());
-
-    console.log("Set Personalized Uninstall URL")
-  });
+            console.debug("Set Personalized Uninstall URL");
+        }
+    });
 }
 
 function useManagementPermissions() {
@@ -209,7 +216,7 @@ function useManagementPermissions() {
 
   browser.management.onUninstalled.addListener(addManagementListener('uninstalled'));
 
-  console.log("Management Monitor started")
+  console.debug("Management Monitor started")
 }
 
 browser.permissions.contains(
