@@ -2,7 +2,7 @@
   "description": "Monitor Firefox web browsing for inappropriate content.",
   "manifest_version": 3,
   "name": "Bark for Firefox",
-  "version": "1.3.0.9",
+  "version": "1.3.0.10",
   "homepage_url": "http://www.bark.us",
   "icons": {
     "192": "icon_192.png",
