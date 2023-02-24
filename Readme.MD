@@ -9,9 +9,15 @@ https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext
 
 ##### Quickstart
 Install NodeJs to get NPM
-then run:
+
+then run and follow any prompts:
 ```
 npm install --global web-ext
+```
+
+then start a new instance of firefox with this extension by running:
+```
+web-ext run
 ```
 
 ### How to build 
