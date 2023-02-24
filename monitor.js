@@ -7,7 +7,7 @@ const CHROME_MONITOR = 'jcocgejjjlnfddlhpbecfapicaajdibb';
 const EDGE_MONITOR = 'pjbpapmfoaplcoaohhdfgdkffdfebmkd';
 const EDGE_WATCHDOG = 'ildciggibamcpacfimbhbkaajnaphljd';
 
-const FIREFOX_WATCH_DOG = 'bark.us@watchdog.fi';//TODO
+const FIREFOX_WATCH_DOG = 'bark.us@watchdog.fi';
 const FIREFOX_MONITOR = 'bark.us@bark.fi';
 
 const BARK_EXTENSION_IDS = [
