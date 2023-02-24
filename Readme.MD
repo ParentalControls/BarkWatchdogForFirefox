@@ -2,6 +2,14 @@
 
 This is an unofficial extension for Firefox for [bark.us](https://www.bark.us/signup?ref=2J6B865). It is based off the official Edge release v1.3.0. You will need to have your child setup in bark as a monitored email.
 
+## Explanation of Application
+
+This application is a child safety monitor that sends urls visited in firefox tabs to the bark.us monitoring service api. The application also sends extension events for the Bark for Firefox and the Bark Watchdog for Firefox application to the bark.us monitoring service api. 
+
+When the application is installed it will prompt the parent, the user during initial setup, to enter their child's email address which has already been configured to be monitored by the bark.us service. After which time it will report on activity the child performs while using firefox. 
+
+The application also has a locks after it is setup, and warns that it will do so to prevent the child from disabling the application in any way other than events monitored by the browser management api and permissions; namely uninstalling or disabling the application in the firefox ui.
+
 ### Required Software to Develop
 You will need web-ext for mozilla.
 
