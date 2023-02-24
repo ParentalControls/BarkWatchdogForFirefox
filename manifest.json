@@ -2,7 +2,7 @@
   "description": "Monitor Firefox web browsing for inappropriate content and for removal of primary application.",
   "manifest_version": 3,
   "name": "Bark Watchdog for Firefox",
-  "version": "1.3.0.7",
+  "version": "1.3.0.9",
   "homepage_url": "http://www.bark.us",
   "icons": {
     "192": "icon_192.png",
