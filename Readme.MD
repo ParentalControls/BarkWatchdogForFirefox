@@ -1,4 +1,4 @@
-# Unofficial Bark For Firefox Extension
+# Unofficial Bark Watchdog For Firefox Extension
 
 This is an unofficial extension for Firefox for [bark.us](https://www.bark.us/signup?ref=2J6B865). It is based off the official Edge release v1.3.0. You will need to have your child setup in bark as a monitored email.
 
