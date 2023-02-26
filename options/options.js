@@ -52,7 +52,7 @@ $('#done').click(function () {
                 error = "You have not yet set your childs email address.";
             }
             if (error) {
-                document.getElementById("error_field").innerHTML = error;
+                document.getElementById("error_field").innerText = error;
                 throw new Error(error);
             } else {
                 window.location.href = "../options/confirm.html"
@@ -88,7 +88,7 @@ $('#done_confirm').click(function () {
     .then(function (res) {
         let error = validateEmail(res);
         if (error) {
-            document.getElementById("error_field").innerHTML = error;
+            document.getElementById("error_field").innerText = error;
             throw new Error(error);
         } else {
             setupUninstallMonitorFirstRun(res);
