@@ -1308,3 +1308,8 @@ footer .social-links.social-links-hidden .dropdown-toggle:hover:after {
         padding-bottom: 5px;
     }
 }
+
+#version {
+    text-align: right;
+    margin-right: 5%;
+}
