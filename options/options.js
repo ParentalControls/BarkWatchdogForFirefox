@@ -2,7 +2,7 @@ const CHROME_MONITOR_PROD = 'jcocgejjjlnfddlhpbecfapicaajdibb';
 const DISPOSITION_URL = 'https://www.bark.us/connections/report-disposition';
 
 function load_config() {
-    document.getElementById('version').innerText = browser.runtime.getManifest().version;
+    document.getElementById('version').innerText = "Version\xa0" + browser.runtime.getManifest().version;//\xa0 is &nbsp;
 
     browser.storage.sync.get(['child_email', 'locked']).then(
         (res) => {
