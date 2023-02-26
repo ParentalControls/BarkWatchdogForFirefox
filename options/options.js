@@ -4,17 +4,24 @@ const DISPOSITION_URL = 'https://www.bark.us/connections/report-disposition';
 function load_config() {
     browser.storage.sync.get(['child_email', 'locked']).then(
         (res) => {
-            let $childUsername = $('#child_username');
+            let childUsername = document.getElementById('child_username');
+
             if (res.child_email) {
-                $childUsername.val(res.child_email);
+                childUsername.value = res.child_email;
             }
+
             if (res.locked) {
-                $childUsername.removeClass("save_config");
-                $childUsername.attr('disabled', 'disabled');
-                $('#done_modal').hide()
-            }
-        });
-}
+                childUsername.disabled = true;
+                if(childUsername.classList){
+                    childUsername.classList.remove("save_config");
+                }
+
+                let doneModal = document.getElementById('done_modal');
+                if(doneModal){
+                    doneModal.remove()
+                }
+            }else{
+//ADD LISTENERS
 
 function save_config() {
     return browser.storage.sync.get(['child_email', 'locked']).then(
@@ -28,10 +35,6 @@ function save_config() {
             }
         });
 }
-
-//listeners
-//Onload
-document.addEventListener('DOMContentLoaded', load_config);
 
 //On change
 $('.save_config').change(function () {
@@ -103,4 +106,11 @@ $('#done_confirm').click(function () {
     });
 });
 
-$('#version').html(browser.runtime.getManifest().version);
+document.getElementById('version').innerText = browser.runtime.getManifest().version;
+            }
+        });
+}
+
+//listeners
+//Onload
+document.addEventListener('DOMContentLoaded', load_config);
