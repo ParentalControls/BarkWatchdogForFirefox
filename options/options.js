@@ -2,6 +2,8 @@ const CHROME_MONITOR_PROD = 'jcocgejjjlnfddlhpbecfapicaajdibb';
 const DISPOSITION_URL = 'https://www.bark.us/connections/report-disposition';
 
 function load_config() {
+    document.getElementById('version').innerText = browser.runtime.getManifest().version;
+
     browser.storage.sync.get(['child_email', 'locked']).then(
         (res) => {
             let childUsername = document.getElementById('child_username');
@@ -106,7 +108,7 @@ $('#done_confirm').click(function () {
     });
 });
 
-document.getElementById('version').innerText = browser.runtime.getManifest().version;
+
             }
         });
 }
