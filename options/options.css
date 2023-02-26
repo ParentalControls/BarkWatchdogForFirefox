@@ -646,7 +646,7 @@ i, em {
 
 footer {
     background-color: #202020;
-    padding: 40px 0 0 0;
+    padding: 10px 0 0 0;
 }
 
 @media screen and (max-width: 767px) {
