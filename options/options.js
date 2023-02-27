@@ -2,25 +2,35 @@ const CHROME_MONITOR_PROD = 'jcocgejjjlnfddlhpbecfapicaajdibb';
 const DISPOSITION_URL = 'https://www.bark.us/connections/report-disposition';
 
 function load_config() {
+    document.getElementById('version').innerText = "Version\xa0" + browser.runtime.getManifest().version;//\xa0 is &nbsp;
+
     browser.storage.sync.get(['child_email', 'locked']).then(
         (res) => {
-            let $childUsername = $('#child_username');
+            let childUsername = document.getElementById('child_username');
+
             if (res.child_email) {
-                $childUsername.val(res.child_email);
+                childUsername.value = res.child_email;
             }
+
             if (res.locked) {
-                $childUsername.removeClass("save_config");
-                $childUsername.attr('disabled', 'disabled');
-                $('#done_modal').hide()
-            }
-        });
-}
+                childUsername.disabled = true;
+                if(childUsername.classList){
+                    childUsername.classList.remove("save_config");
+                }
+
+                let doneModal = document.getElementById('done_modal');
+                if(doneModal){
+                    doneModal.remove()
+                }
+            }else{
+//ADD LISTENERS
 
 function save_config() {
     return browser.storage.sync.get(['child_email', 'locked']).then(
         (res) => {
             if (!res.locked) {
-                let childEmail = $('#child_username').val();
+                let childUsername = document.getElementById('child_username');
+                let childEmail = childUsername.value;
 
                 browser.storage.sync.set({
                     child_email: childEmail,
@@ -29,18 +39,15 @@ function save_config() {
         });
 }
 
-//listeners
-//Onload
-document.addEventListener('DOMContentLoaded', load_config);
-
 //On change
-$('.save_config').change(function () {
+childUsername.addEventListener('change',function () {
     save_config();
 });
 
-$('#done').click(function () {
-
-    save_config()
+let doneButton = document.getElementById('done');
+if(doneButton) {
+    doneButton.addEventListener('click', function () {
+        save_config()
         .then(function () {
             return browser.storage.sync.get(['child_email', 'locked'])
         })
@@ -52,15 +59,17 @@ $('#done').click(function () {
                 error = "You have not yet set your childs email address.";
             }
             if (error) {
-                document.getElementById("error_field").innerHTML = error;
+                document.getElementById("error_field").innerText = error;
                 throw new Error(error);
             } else {
                 window.location.href = "../options/confirm.html"
             }
         })
-});
+    });
+}
 
-$('#done_confirm').click(function () {
+let doneConfirmedButton = document.getElementById('done_confirm');
+if(doneConfirmedButton) {
     function setupUninstallMonitorFirstRun(res) {
         const url = new URL(DISPOSITION_URL);
 
@@ -76,7 +85,7 @@ $('#done_confirm').click(function () {
     function validateEmail(res) {
         let error = null;
         if (!res.child_email) {
-            error = "You have not yet set your childs email address. Please press the 'Go Back' button.";
+            error = "You have not yet set your child's email address. Please press the 'Go Back' button.";
         }
 
         //TODO Validate email first is in valid .+\@.+\..+ format
@@ -84,23 +93,32 @@ $('#done_confirm').click(function () {
         return error;
     }
 
-    browser.storage.sync.get(['child_email'])
-    .then(function (res) {
-        let error = validateEmail(res);
-        if (error) {
-            document.getElementById("error_field").innerHTML = error;
-            throw new Error(error);
-        } else {
-            setupUninstallMonitorFirstRun(res);
+    doneConfirmedButton.addEventListener('click', function () {
+        browser.storage.sync.get(['child_email'])
+        .then(function (res) {
+            let error = validateEmail(res);
+            if (error) {
+                document.getElementById("error_field").innerText = error;
+                throw new Error(error);
+            } else {
+                setupUninstallMonitorFirstRun(res);
 
-            browser.storage.sync.set({
-                locked: 'locked',
-            }).then(function () {
-                console.log("Locked in email of [",res.child_email,"]");
-                window.location.href = "../options/options.html"
-            });
-        }
+                browser.storage.sync.set({
+                    locked: 'locked',
+                }).then(function () {
+                    console.log("Locked in email of [", res.child_email, "]");
+                    window.location.href = "../options/options.html"
+                });
+            }
+        });
     });
-});
+}
 
-$('#version').html(browser.runtime.getManifest().version);
+
+            } // end of not locked else
+        }); //end of promise.then from storage
+}// end of load_config
+
+//listeners
+//Onload
+document.addEventListener('DOMContentLoaded', load_config);
