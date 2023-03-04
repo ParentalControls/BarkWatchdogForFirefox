@@ -2,6 +2,17 @@ const CHROME_MONITOR_PROD = 'jcocgejjjlnfddlhpbecfapicaajdibb';
 const DISPOSITION_URL = 'https://www.bark.us/connections/report-disposition';
 
 function load_config() {
+    function getUninstalledURL(res) {
+        const url = new URL(DISPOSITION_URL);
+
+        url.searchParams.append('email', res.child_email);
+        url.searchParams.append('disposition', 'uninstalled');
+        url.searchParams.append('reporter', CHROME_MONITOR_PROD);
+        url.searchParams.append('extension', CHROME_MONITOR_PROD);
+
+        return url;
+    }
+
     document.getElementById('version').innerText = "Version\xa0" + browser.runtime.getManifest().version;//\xa0 is &nbsp;
 
     browser.storage.sync.get(['child_email', 'locked']).then(
@@ -22,7 +33,45 @@ function load_config() {
                 if(doneModal){
                     doneModal.remove()
                 }
-            }else{
+
+                let unlockModal = document.getElementById('unlock_modal');
+                let unlockButton = document.getElementById("unlock");
+                if (unlockModal && unlockButton) {
+                    if(unlockModal.classList){
+                        unlockModal.classList.remove("hidden")
+                    }
+
+                    let uninstalledURL = null;
+                    unlockButton.addEventListener('click', function () {
+                        browser.storage.sync.get(['child_email', 'locked'])
+                        .then(function (res) {
+                            if (!res.locked) {
+                                console.error("Already Unlocked.", res);
+                                return Promise.reject("Already Unlocked");
+                            }
+
+                            uninstalledURL = getUninstalledURL(res);
+                            const uri = new URL(uninstalledURL);
+                            uri.searchParams.append('silent', true);
+                            return fetch(uri.toString(), {
+                                credentials: 'omit',
+                                mode: 'no-cors',
+                                cache: 'no-store',
+                            });
+                        }).then(function (fetchRes){
+                            return browser.storage.sync.remove('locked')
+                        }).then(function (deleted) {
+                            window.location.href = uninstalledURL;
+                        }).catch(function (err) {
+                            console.error("Unable to unlock", err);
+                        });
+                    });
+                }
+            } else {
+                let unlockModal = document.getElementById('unlock_modal');
+                if(unlockModal) {
+                    unlockModal.remove();
+                }
 //ADD LISTENERS
 
 function save_config() {
@@ -71,12 +120,7 @@ if(doneButton) {
 let doneConfirmedButton = document.getElementById('done_confirm');
 if(doneConfirmedButton) {
     function setupUninstallMonitorFirstRun(res) {
-        const url = new URL(DISPOSITION_URL);
-
-        url.searchParams.append('email', res.child_email);
-        url.searchParams.append('disposition', 'uninstalled');
-        url.searchParams.append('reporter', CHROME_MONITOR_PROD);
-        url.searchParams.append('extension', CHROME_MONITOR_PROD);
+        const url = getUninstalledURL(res);
         browser.runtime.setUninstallURL(url.toString());
 
         console.log("Set First-Time Personalized Uninstall URL");
